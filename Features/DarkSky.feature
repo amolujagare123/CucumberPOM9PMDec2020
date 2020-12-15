@@ -8,6 +8,7 @@ Feature:  darksky whether page testing (darksky.net - whether forecasting websit
 
 
 #2
+  @veriyTimeDiff
   Scenario: Verify timeline is displayed in correct format
     Given I am on Darksky Home Page
     Then I verify timeline is displayed with two hours incremented
