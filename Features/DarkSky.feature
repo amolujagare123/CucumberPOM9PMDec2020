@@ -15,12 +15,14 @@ Feature:  darksky whether page testing (darksky.net - whether forecasting websit
 
 
 #3
+  @todaysTemp
   Scenario: Verify individual day temp timeline
     Given I am on Darksky Home Page
     Then I verify today's lowest and highest temp is displayed correctly
 
 
 #4 :
+  @login
   Scenario: Verify invalid error message on Login Page
     Given I am on the darksky Login page
     When I click on Login button

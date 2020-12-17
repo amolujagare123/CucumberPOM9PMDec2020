@@ -3,6 +3,8 @@ package StepDefinition;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import pages.DarkSkyHome;
 
 import java.util.ArrayList;
@@ -74,9 +76,27 @@ public class DarkSkySD {
     public void i_verify_todays_lowest_and_highest_temp_is_displayed_correctly()
            {
 
+               // code to scroll
+
+               JavascriptExecutor js = (JavascriptExecutor) SharedSD.getDriver();
+            //   js.executeScript("window.scrollBy(0,650)", "");
+
+               js.executeScript("arguments[0].scrollIntoView(true);",
+                       SharedSD.getDriver().findElement(By.xpath("(//div[@class='summary'])[1]")));
 
 
+               darkSkyHome.clickExpander();
 
-    }
+
+               ArrayList<String> expected = darkSkyHome.getTimelineTempList();
+               ArrayList<String> actual = darkSkyHome.getBarTempList();
+
+               System.out.println("Expected(timeline) : "+expected);
+               System.out.println("Actual(Bar) : "+actual);
+
+
+               Assert.assertEquals("temperatures are not correct",expected,actual);
+
+           }
 
 }

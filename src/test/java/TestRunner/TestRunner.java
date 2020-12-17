@@ -6,6 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "Features",glue = "StepDefinition"
-,tags = "@veriyTimeDiff")
+,tags = "@login")
 public class TestRunner {
 }

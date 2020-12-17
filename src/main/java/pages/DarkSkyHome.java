@@ -14,6 +14,55 @@ public class DarkSkyHome extends BasePage{
 
     By timeList = By.xpath("//span[@class='hour']/span");
 
+    By expander = By.xpath("//a[@data-day='0']//span[@class='toggle']");
+    By barMinTemp = By.xpath("//a[@class='day revealed']//span[@class='minTemp']");
+    By barMaxTemp = By.xpath("//a[@class='day revealed']//span[@class='maxTemp']");
+
+    By timelineMinTemp =By.xpath("//div[@class='dayDetails revealed']//span[@class='highTemp swip']//span[@class='temp']");
+    By timelineMaxTemp =By.xpath("//div[@class='dayDetails revealed']//span[@class='lowTemp swap']//span[@class='temp']");
+
+    By lnkDarkSkyAPI = By.xpath("//a[normalize-space()='Dark Sky API']");
+
+    public void clickDarkskyAPI()
+    {
+        clickOn(lnkDarkSkyAPI);
+    }
+
+
+    public ArrayList<String> getBarTempList()
+    {
+        ArrayList<String> tempList = new ArrayList<>();
+
+        String minTemp = getTextFromElement(barMinTemp).split("˚")[0];
+        String maxTemp = getTextFromElement(barMaxTemp).split("˚")[0];
+        tempList.add(minTemp);
+        tempList.add(maxTemp);
+
+        return tempList;
+
+    }
+
+    public ArrayList<String> getTimelineTempList()
+    {
+        ArrayList<String> tempList = new ArrayList<>();
+
+        String minTemp = getTextFromElement(timelineMinTemp).split("˚")[0];
+        String maxTemp = getTextFromElement(timelineMaxTemp).split("˚")[0];
+        tempList.add(minTemp);
+        tempList.add(maxTemp);
+        return tempList;
+
+    }
+
+
+
+    public void clickExpander()
+    {
+        clickOn(expander);
+    }
+
+
+
     public ArrayList<Integer> getTimeList()
     {
        ArrayList<String> timeListRaw =  getElementTextList(timeList);
