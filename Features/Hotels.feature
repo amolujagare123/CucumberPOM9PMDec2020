@@ -16,14 +16,15 @@ Feature: Hotels.com website testing
    #   | 3 stars |
 
 #2
-
+  @verifyDist
   Scenario: List of all of hotel within 6 km radius of airport
     Given I am on default locations search result screen
-    Then I verify system displays all hotels within "6" Km radius of airport
-    And I verify "ibis Mumbai" is within radius
+   # Then I verify system displays all hotels within "25" Km radius of airport
+    And I verify "Hyatt" is within radius
 
 
 #3
+  @testDeal
   Scenario: Verify todays deal price value
     Given I am on default locations search result screen
     Then I verify todays deal is less than "5000" rs
@@ -35,7 +36,7 @@ Feature: Hotels.com website testing
     Then I verify <number_of_room_dropdown> is displayed
 
     Examples:
-      |select_rooms            | number_of_room_dropdown |
-      | 2                    		| 2              			         |
-      | 5                     		 | 5               			        |
-      | 9+                    		 | 0                   			    |
+      |select_rooms           | number_of_room_dropdown             |
+      | 2                     | 2              			            |
+      | 5                     | 5               			        |
+      | 9+                    | 0                   			    |

@@ -10,6 +10,64 @@ public class HotelsSearchResult extends  BasePage{
 
     By starRatings = By.xpath("//span[contains(@class,'star-rating-text')]");
 
+    By airportDistTextList = By.xpath("//ul[@class='property-landmarks']/li[2]");
+
+    By hotelList =By.xpath("//a[@class='property-name-link']");
+
+
+    By dealPriceRaw = By.xpath("//aside[@class='pricing resp-module']//ins");
+
+    public int getDealPrice()
+    {
+        String priceRaw = getTextFromElement(dealPriceRaw);
+
+        String priceWithoutRS = priceRaw.substring(2); //  2,498
+
+        String priceWithoutCommaStr ="";
+
+
+        for(int i=0;i<priceWithoutRS.length();i++)
+        {
+            if(priceWithoutRS.charAt(i)!=',')
+            {
+                priceWithoutCommaStr =priceWithoutCommaStr +priceWithoutRS.charAt(i);
+            }
+
+        }
+
+        int price = Integer.parseInt(priceWithoutCommaStr); // int ->  2498
+
+
+        return  price;
+    }
+
+
+    public ArrayList<String> getHotelList()
+    {
+        return  getElementTextList(hotelList);
+    }
+
+
+    public ArrayList<Double> getAirportDistList()
+    {
+       ArrayList<String> distListRow =  getElementTextList(airportDistTextList);
+        ArrayList<Double> distList = new ArrayList<>();
+
+       for(int i=0;i<distListRow.size();i++)
+       {
+           //4.9 km to Chhatrapati Shivaji International Airport (BOM)
+           String distStr = distListRow.get(i).split(" ")[0];
+           double dist = Double.parseDouble(distStr);
+
+           distList.add(dist);
+       }
+
+       return distList;
+
+    }
+
+
+
     public ArrayList<String> getStarList()
     {
         return  getElementTextList(starRatings);
