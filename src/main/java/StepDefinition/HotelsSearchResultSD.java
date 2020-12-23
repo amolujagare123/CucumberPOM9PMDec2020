@@ -2,6 +2,7 @@ package StepDefinition;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
 import pages.HotelsSearchResult;
 
@@ -61,17 +62,47 @@ public class HotelsSearchResultSD {
 
         int expectedDealPrice = Integer.parseInt(dealPriceStr);
 
-        SharedSD.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        SharedSD.getDriver().manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
 
-        hotelsSearchResult.clikStarRatings("4");
+       /* hotelsSearchResult.clikStarRatings("4");
 
-        SharedSD.getDriver().manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-
+        SharedSD.getDriver().manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
+*/
 
         int actualDealPrice = hotelsSearchResult.getDealPrice();
 
-        System.out.println(actualDealPrice);
+        System.out.println("Actual price="+actualDealPrice);
+
+        System.out.println("Expected price="+expectedDealPrice);
+
+              boolean result =   actualDealPrice < expectedDealPrice ;
+
+              Assert.assertTrue("the actual price is greater than deal price",result);
 
     }
+
+
+    @When("^I select (.+) from room dropdown$")
+    public void i_select_from_room_dropdown(String selectrooms) throws Throwable {
+
+        hotelsSearchResult.setRooms(selectrooms);
+
+    }
+
+    @Then("^I verify (.+) is displayed$")
+    public void i_verify_is_displayed(String numberofroomdropdown) throws Throwable {
+
+        int expectedRoomDropdownCount = Integer.parseInt(numberofroomdropdown);
+
+        int actualRoomDropdownCount = hotelsSearchResult.getRoomDropDownCounts();
+
+        System.out.println("Expected RoomDropdownCount="+expectedRoomDropdownCount);
+        System.out.println("Actual RoomDropdownCount="+actualRoomDropdownCount);
+
+        Assert.assertEquals("room dropdown count does not maches with the expected",
+                expectedRoomDropdownCount,actualRoomDropdownCount);
+
+    }
+
 
 }

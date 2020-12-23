@@ -24,14 +24,16 @@ Feature: Hotels.com website testing
 
 
 #3
-  @testDeal
+  @verifyDeal
   Scenario: Verify todays deal price value
     Given I am on default locations search result screen
-    Then I verify todays deal is less than "5000" rs
+    Then I verify todays deal is less than "1000" rs
+    # consider first hotels price as todays deal
 
 #4
+  @verify
   Scenario Outline: Verify room count dropdown
-    Given I am on hotels.com home page
+  #  Given I am on hotels.com home page
     When I select <select_rooms> from room dropdown
     Then I verify <number_of_room_dropdown> is displayed
 

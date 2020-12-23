@@ -16,6 +16,24 @@ public class HotelsSearchResult extends  BasePage{
 
 
     By dealPriceRaw = By.xpath("//aside[@class='pricing resp-module']//ins");
+  //By dealPriceRaw = By.xpath("//div[@class='price']");
+
+
+   By roomDropDown = By.xpath("//select[@id='qf-0q-rooms']");
+
+   By roomDropDownCounts = By.xpath("//div[@class='widget-query-people']");
+
+   public int getRoomDropDownCounts()
+   {
+       return SharedSD.getDriver().findElements(roomDropDownCounts).size();
+   }
+
+
+   public void setRooms(String rooms)
+   {
+       selectFromDropdown(roomDropDown,rooms);
+   }
+
 
     public int getDealPrice()
     {
